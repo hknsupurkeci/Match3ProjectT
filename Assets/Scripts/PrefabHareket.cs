@@ -23,7 +23,10 @@ public class PrefabHareket : MonoBehaviour
 
             if (dokunus.phase == TouchPhase.Began)
             {
-                fareBaslangicPozisyonu = Camera.main.ScreenToWorldPoint(dokunus.position);
+                Vector3 pos = dokunus.position;
+                pos.z = 10;
+                fareBaslangicPozisyonu = Camera.main.ScreenToWorldPoint(pos);
+
                 RaycastHit2D hit = Physics2D.Raycast(fareBaslangicPozisyonu, Vector2.zero);
 
                 if (hit.collider != null)
@@ -37,7 +40,9 @@ public class PrefabHareket : MonoBehaviour
                 if (objMoving)
                 {
                     // Hareket yönlendirmesi hesaplamasý burada yapýlabilir
-                    Vector2 fareSonPozisyonu = Camera.main.ScreenToWorldPoint(dokunus.position);
+                    Vector3 pos = dokunus.position;
+                    pos.z = 10;
+                    Vector2 fareSonPozisyonu = Camera.main.ScreenToWorldPoint(pos);
 
                     Vector2 hareketYönü = fareSonPozisyonu - fareBaslangicPozisyonu;
 

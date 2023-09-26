@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2450774473159856580}
   - component: {fileID: 3441391837809626956}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: BoxThree
   m_TagString: Triangle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
