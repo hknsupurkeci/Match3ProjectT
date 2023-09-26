@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -183,7 +184,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 6
   m_Depth: -1
   m_CullingMask:
@@ -215,6 +216,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe7f57000b345e4a88cc6aaca257763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFovValue: 30
+  cameraFOV: 0
+  creator: {fileID: 615130434}
 --- !u!1 &615130430
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +302,7 @@ MonoBehaviour:
   boardDepth: 0.6
   destroyEffect: {fileID: 100000, guid: f2dba9e16cd347f44a395b8204544ee5, type: 3}
   matchEffect: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  shapeObject: {fileID: 11400000, guid: 350b9a60226f230459163a23958b676d, type: 2}
 --- !u!1 &648696199
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 648696199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0696371, y: 1.53, z: -0.10270305}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 1837304293}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0696371, y: 1.53, z: -0.10270305}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

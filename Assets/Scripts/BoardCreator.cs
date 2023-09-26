@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,6 @@ public class BoardCreator : MonoBehaviour
 
     private void Start()
     {
-        board = new Board(boardWidth, boardHeight);
         CreateBoard();
     }
 
@@ -36,7 +35,7 @@ public class BoardCreator : MonoBehaviour
 
         boardHeight = shape.GetLength(0);
         boardWidth = shape.GetLength(1);
-        // Yatayda ve dikeyde taþ eþleþmelerini kontrol et
+        // Yatayda ve dikeyde taÅŸ eÅŸleÅŸmelerini kontrol et
         for (int x = 0; x < boardHeight; x++)
         {
             for (int y = 0; y < boardWidth; y++)
@@ -55,8 +54,8 @@ public class BoardCreator : MonoBehaviour
                         {
                             if (currentObj.tag == obj1.tag && currentObj.tag == obj2.tag)
                             {
-                                Debug.Log("Yatay eþleþme bulundu: " + currentObj.tag);
-                                // Eþleþme bulunduðunda yapýlacak iþlemleri burada gerçekleþtirin
+                                Debug.Log("Yatay eÅŸleÅŸme bulundu: " + currentObj.tag);
+                                // EÅŸleÅŸme bulunduÄŸunda yapÄ±lacak iÅŸlemleri burada gerÃ§ekleÅŸtirin
                                 StartCoroutine(FillBoardCoroutine(currentObj, obj1, obj2));
                             }
                         }
@@ -72,8 +71,8 @@ public class BoardCreator : MonoBehaviour
                         {
                             if (currentObj.tag == obj1.tag && currentObj.tag == obj2.tag)
                             {
-                                Debug.Log("Dikey eþleþme bulundu: " + currentObj.tag);
-                                // Eþleþme bulunduðunda yapýlacak iþlemleri burada gerçekleþtirin
+                                Debug.Log("Dikey eÅŸleÅŸme bulundu: " + currentObj.tag);
+                                // EÅŸleÅŸme bulunduÄŸunda yapÄ±lacak iÅŸlemleri burada gerÃ§ekleÅŸtirin
                                 StartCoroutine(FillBoardCoroutine(currentObj, obj1, obj2));
                             }
                         }
@@ -92,7 +91,7 @@ public class BoardCreator : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         //destroy and instantiate
 
-        // Pozisyonlarý kontrol edin ve saklayýn
+        // PozisyonlarÄ± kontrol edin ve saklayÄ±n
         Vector3? currentObjPos = currentObj ? currentObj.transform.position : (Vector3?)null;
         Vector3? obj1Pos = obj1 ? obj1.transform.position : (Vector3?)null;
         Vector3? obj2Pos = obj2 ? obj2.transform.position : (Vector3?)null;
@@ -108,7 +107,7 @@ public class BoardCreator : MonoBehaviour
         Destroy(currentObj);
         Destroy(obj1);
         Destroy(obj2);
-        yield return new WaitForSeconds(0.5f); // Biraz bekleme süresi ekleyebilirsin
+        yield return new WaitForSeconds(0.5f); // Biraz bekleme sÃ¼resi ekleyebilirsin
 
         int destroyCount = 0;
         float xValue = boardWidth < 8 ? (8 - boardWidth) * 0.3f : 0;
@@ -120,9 +119,9 @@ public class BoardCreator : MonoBehaviour
                 if (shape[x, y] == 1 && board.boardArray[x, y] == null)
                 {
                     //Prefabs
-                    Vector3 hücreKonumu2 = new Vector3(xValue, yValue, -0.01f);
+                    Vector3 hÃ¼creKonumu2 = new Vector3(xValue, yValue, -0.1f);
                     GameObject randomPref = tilePrefabs[Random.Range(0, tilePrefabs.Length)];
-                    GameObject newPref = Instantiate(randomPref, hücreKonumu2, Quaternion.identity);
+                    GameObject newPref = Instantiate(randomPref, hÃ¼creKonumu2, Quaternion.identity);
                     Instantiate(matchEffect, newPref.transform.position, Quaternion.identity);
 
                     newPref.transform.SetParent(inGameObject.transform);
@@ -161,13 +160,13 @@ public class BoardCreator : MonoBehaviour
                     newCell.transform.SetParent(backgroundObject.transform);
 
                     // Prefabs
-                    Vector3 randomStartPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(10f, 20f), -0.01f);
+                    Vector3 randomStartPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(10f, 20f), -0.1f);
                     GameObject tilePrefab = GetValidTile(x, y);
                     GameObject newTile = Instantiate(tilePrefab, randomStartPosition, Quaternion.identity);
                     newTile.transform.SetParent(inGameObject.transform);
                     board.boardArray[x, y] = newTile;
 
-                    // Lerp hareketi için coroutine baþlat
+                    // Lerp hareketi iÃ§in coroutine baÅŸlat
                     StartCoroutine(MoveTileToPosition(newTile, cellPosition));
                 }
 
@@ -179,10 +178,16 @@ public class BoardCreator : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Akici bir sekilde preflerin baslangÄ±c yerlerine gelmesini saglar.
+    /// </summary>
+    /// <param name="tile"></param>
+    /// <param name="targetPosition"></param>
+    /// <returns></returns>
     IEnumerator MoveTileToPosition(GameObject tile, Vector3 targetPosition)
     {
-        float lerpTime = 2f; // Bu süreyi ayarlayarak hareketin ne kadar süre alacaðýný belirleyebilirsiniz.
+        targetPosition = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - 0.05f);
+        float lerpTime = 2f; // Bu sÃ¼reyi ayarlayarak hareketin ne kadar sÃ¼re alacaÄŸÄ±nÄ± belirleyebilirsiniz.
         float startTime = Time.time;
         Vector3 startPosition = tile.transform.position;
 
@@ -213,9 +218,16 @@ public class BoardCreator : MonoBehaviour
                 possibleTiles.Remove(randomTile);
             }
         }
-        return tilePrefabs[Random.Range(0, tilePrefabs.Length)]; // Fallback, bu durumun olmamasý gerekir.
+        return tilePrefabs[Random.Range(0, tilePrefabs.Length)]; // Fallback, bu durumun olmamasÄ± gerekir.
     }
 
+    /// <summary>
+    /// Baslangicta eslesme sorunun giderir, pref eslesmesini engeller.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="tile"></param>
+    /// <returns></returns>
     private bool IsValidPlacement(int x, int y, GameObject tile)
     {
         if (x >= 2)
@@ -248,7 +260,7 @@ public class BoardCreator : MonoBehaviour
 
     IEnumerator LerpPosition(Vector3 startPos, Vector3 targetPos, GameObject obj)
     {
-        float lerpDuration = 0.3f; // Hareket süresi (saniye)
+        float lerpDuration = 0.3f; // Hareket sÃ¼resi (saniye)
         float elapsedTime = 0f;
 
         while (elapsedTime < lerpDuration)
@@ -259,8 +271,8 @@ public class BoardCreator : MonoBehaviour
             yield return null;
         }
 
-        // Ýþlem sonrasý pozisyonu kesinleþtirin
-        obj.transform.position = new Vector3(targetPos.x, targetPos.y,-0.01f);
+        // Ä°ÅŸlem sonrasÄ± pozisyonu kesinleÅŸtirin
+        obj.transform.position = new Vector3(targetPos.x, targetPos.y, -0.1f);
     }
 
     public void PrefMovingControl(MoveOptions moveOptions, GameObject selectedObj)

@@ -7,6 +7,7 @@ TagManager:
   - Circle
   - Triangle
   - Hexagon
+  - BoxFour
   layers:
   - Default
   - TransparentFX
